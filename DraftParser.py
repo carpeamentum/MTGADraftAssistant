@@ -1,5 +1,6 @@
 import sys
 import json
+import platform
 from getpass import getuser
 
 import DraftFile
@@ -16,8 +17,13 @@ class MtgaDraftParser(QThread):
 
     def __init__(self):
         super().__init__()
-        username=getuser()
-        self.logfilefullpath = "C:/Users/"+username+"/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt"
+        if platform.system() == "Windows":
+            username=getuser()
+            self.logfilefullpath = "C:/Users/"+username+"/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt"
+        else:
+            #We will start by just supporting Wine installations on Mac in addition to our Windows support.
+            #Please update this if your system isn't supported and you are capable of testing out changes on the fly.
+            self.logfilefullpath = "/Applications/MTGArena.app/Contents/Resources/drive_c/users/Wineskin/AppData/LocalLow/Wizards Of The Coast/MTGA/output_log.txt"
         self.playerInventory = PlayerInventory()
         self.cardMap = CardMap()
         self.uncommonPrintRun = UncommonPrintRun(self.cardMap)
