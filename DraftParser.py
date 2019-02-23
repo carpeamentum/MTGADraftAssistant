@@ -128,7 +128,10 @@ class MtgaDraftParser(QThread):
             if card['rarity'] == 'uncommon':
                 uncommons.append(card)
 
-        setCode = statusObj['eventName'].split('_')[1]
+        if "Greedy_Draft" in statusObj['eventName']:
+            setCode = 'RNA'
+        else:
+            setCode = statusObj['eventName'].split('_')[1]
         self.uncommonPrintRun.printUncommonPrintRunInfo(uncommons, setCode)
         uncommonPack = self.uncommonPrintRun.getUncommonPrintRun(uncommons, setCode)
         self.draftPackUpdate.emit(draftPack, uncommonPack)
