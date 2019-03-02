@@ -1,7 +1,9 @@
 from CardMap import CardMap
 
 printRunFilenames = {'RNA': "uncommonData/mtg_arena_rna_uncommon_print_run.txt",
-                     'GRN': "uncommonData/mtg_arena_grn_uncommon_print_run.txt"}
+                     'GRN': "uncommonData/mtg_arena_grn_uncommon_print_run.txt",
+                     'RIX': "uncommonData/mtg_arena_rix_uncommon_print_run.txt",
+                     'XLN': "uncommonData/mtg_arena_xln_uncommon_print_run.txt"}
 
 
 class UncommonPrintRun():
@@ -10,6 +12,7 @@ class UncommonPrintRun():
         self.cardMap = cardMap
     
     def loadPrintRunData(self, setCode):
+        setCode = setCode.upper()
         self.printRunData[setCode] = []
         with open(printRunFilenames[setCode]) as f:
             line = f.readline()
@@ -18,6 +21,7 @@ class UncommonPrintRun():
                 line = f.readline()
 
     def printRunIndexer(self, setCode, index):
+        setCode = setCode.upper()
         if index <0:
             return len(self.printRunData[setCode])+index-1
         elif index >= len(self.printRunData[setCode]):
@@ -26,6 +30,7 @@ class UncommonPrintRun():
             return index
 
     def printUncommonPrintRunInfo(self, uncommons, setCode):
+        setCode = setCode.upper()
         printruninfo = self.getUncommonPrintRun(uncommons, setCode)
         if printruninfo:
             if len(printruninfo) == 1:
@@ -36,6 +41,7 @@ class UncommonPrintRun():
                     print(card['name'])
 
     def getUncommonPrintRun(self, uncommons, setCode):
+        setCode = setCode.upper()
         if setCode not in self.printRunData:
             self.loadPrintRunData(setCode)
         printRunInfo = []

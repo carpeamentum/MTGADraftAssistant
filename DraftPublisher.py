@@ -10,7 +10,6 @@ class DraftPublisher(QWidget):
     def __init__(self):
         super().__init__()
         self.cardMap = CardMap()
-##        self.initUI()
 
     def getCardInfo(self, cardId):
         for card in self.cardMap.getMap():
@@ -20,6 +19,9 @@ class DraftPublisher(QWidget):
 
     def getCardName(self, cardId):
         return self.getCardInfo(cardId)['name']
+
+    def pickExistsInData(self, draftData, pack, pick):
+        return 'p'+str(pack)+'p'+str(pick)+'pick' in draftData
     
     def buildPickString(self, draftData, pack, pick):
         cardString=""
@@ -61,8 +63,9 @@ class DraftPublisher(QWidget):
         with open(outfile, 'w+') as of:
             for pack in range(3):
                 for pick in range(15):
-                    pickString = self.buildPickString(draftData, pack, pick)
-                    of.write(pickString)
+                    if self.pickExistsInData(draftData, pack, pick):
+                        pickString = self.buildPickString(draftData, pack, pick)
+                        of.write(pickString)
             deckString = self.buildDeckString(draftData['deck'])
             of.write(deckString)
         
