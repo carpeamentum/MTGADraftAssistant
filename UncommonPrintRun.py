@@ -43,7 +43,10 @@ class UncommonPrintRun():
     def getUncommonPrintRun(self, uncommons, setCode):
         setCode = setCode.upper()
         if setCode not in self.printRunData:
-            self.loadPrintRunData(setCode)
+            if setCode in  printRunFilenames:
+                self.loadPrintRunData(setCode)
+            else:
+                return([])
         printRunInfo = []
         if len(uncommons) == 2:
             index1 = self.printRunData[setCode].index(uncommons[0]['name'])
