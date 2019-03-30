@@ -2,6 +2,8 @@ from CardMap import CardMap
 
 printRunFilenames = {'RNA': "uncommonData/mtg_arena_rna_uncommon_print_run.txt",
                      'GRN': "uncommonData/mtg_arena_grn_uncommon_print_run.txt",
+                     'M19': "uncommonData/mtg_arena_m19_uncommon_print_run.txt",
+                     'DOM': "uncommonData/mtg_arena_dom_uncommon_print_run.txt",
                      'RIX': "uncommonData/mtg_arena_rix_uncommon_print_run.txt",
                      'XLN': "uncommonData/mtg_arena_xln_uncommon_print_run.txt"}
 
